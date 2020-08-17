@@ -1,3 +1,4 @@
+import { ProductService } from './shared/services/product.service';
 import { StarComponent } from './shared/components/star/star.component';
 import { ConvertHyphenToSpaces } from './shared/pipes/convert-hyphen-to-space.pipe';
 import { BrowserModule } from '@angular/platform-browser';
