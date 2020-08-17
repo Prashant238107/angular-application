@@ -16,14 +16,11 @@ export class ProductListComponent implements OnInit {
   public filteredProducts: IProduct[];
 
   ngOnInit(): void {
-    console.log('NgOnInit is called');
+    this.products = this._productService.getProducts();
+    this.filteredProducts = this.products;
   }
 
-  constructor(private _productService: ProductService) {
-    this.products = _productService.getProducts();
-    this.filteredProducts = this.products;
-    this.listFilter = 'cart';
-  }
+  constructor(private _productService: ProductService) {}
 
   public get listFilter(): string {
     return this._listFilter;
