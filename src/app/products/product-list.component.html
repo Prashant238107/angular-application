@@ -20,25 +20,17 @@
           <tr>
             <th>
               <button class="btn btn-primary" (click)="toggleImage()">
-                {{ showImage ? "Hide " : "Show " }}Image
+                {{ showImage ? "Hide" : "Show" }} Image
               </button>
             </th>
-            <th>
-              Product
-            </th>
-            <th>
-              Code
-            </th>
-            <th>
-              Available
-            </th>
-            <th>
-              Price
-            </th>
-            <th>
-              Star Rating
-            </th>
+            <th>Product</th>
+            <th>Code</th>
+            <th>Available</th>
+            <th>Price</th>
+            <th>5 Star Rating</th>
           </tr>
+        </thead>
+        <tbody>
           <tr *ngFor="let product of products">
             <td>
               <img
@@ -49,24 +41,15 @@
                 [style.margin.px]="imageMargin"
               />
             </td>
-            <td>
-              {{ product.productName }}
-            </td>
+            <td>{{ product.productName }}</td>
             <td>
               {{ product.productCode | lowercase }}
             </td>
-            <td>
-              {{ product.releaseDate }}
-            </td>
-            <td>
-              {{ product.price | currency: "USD":"symbol":"1.2-2" }}
-            </td>
-            <td>
-              {{ product.starRating }}
-            </td>
+            <td>{{ product.releaseDate }}</td>
+            <td>{{ product.price | currency: "USD":"symbol":"1.2-2" }}</td>
+            <td>{{ product.starRating }}</td>
           </tr>
-        </thead>
-        <tbody></tbody>
+        </tbody>
       </table>
     </div>
   </div>
