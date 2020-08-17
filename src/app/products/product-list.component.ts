@@ -7,15 +7,12 @@ import { IProduct } from './product';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent implements OnInit {
-  ngOnInit(): void {
-    console.log('NgOnInit is called');
-  }
-  pageTitle = 'Product List';
-  imageMargin = 2;
-  imageWidth = 50;
-  showImage = false;
-  listFilter = 'cart';
-  products: IProduct[] = [
+  public pageTitle = 'Product List';
+  public imageMargin = 2;
+  public imageWidth = 50;
+  public showImage = false;
+  private _listFilter = 'cart';
+  public products: IProduct[] = [
     {
       productId: 1,
       productName: 'Leaf Rake',
@@ -67,8 +64,38 @@ export class ProductListComponent implements OnInit {
       imageUrl: 'assets/images/xbox-controller.png',
     },
   ];
+  public filteredProducts: IProduct[];
 
-  toggleImage(): void {
+  ngOnInit(): void {
+    console.log('NgOnInit is called');
+  }
+
+  constructor() {
+    this.filteredProducts = this.products;
+    this.listFilter = 'cart';
+  }
+
+  public get listFilter(): string {
+    return this._listFilter;
+  }
+
+  public set listFilter(listFilter: string) {
+    this._listFilter = listFilter;
+
+    this.filteredProducts = this.listFilter
+      ? this._performFilter(this.listFilter)
+      : this.products;
+  }
+
+  public toggleImage(): void {
     this.showImage = !this.showImage;
+  }
+
+  private _performFilter(filterBy: string) {
+    filterBy = filterBy.toLowerCase();
+    return this.products.filter(
+      (product: IProduct) =>
+        product.productName.toLowerCase().indexOf(filterBy) !== -1
+    );
   }
 }
