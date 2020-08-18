@@ -1,4 +1,3 @@
-import { ProductService } from './shared/services/product.service';
 import { StarComponent } from './shared/components/star/star.component';
 import { ConvertHyphenToSpaces } from './shared/pipes/convert-hyphen-to-space.pipe';
 import { BrowserModule } from '@angular/platform-browser';
@@ -8,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './products/product-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ProductListComponent } from './products/product-list.component';
     ConvertHyphenToSpaces,
     StarComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
