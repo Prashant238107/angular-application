@@ -1,52 +1,55 @@
 <div class="card" *ngIf="product">
-  <div class="card-header">Product Detail: {{ product.productName }}</div>
+  <div class="card-header">
+    {{ pageTitle + ": " + product.productName }}
+  </div>
+
   <div class="card-body">
-    <div class="inline-div">
-      <div class="titles">
-        <div>
-          <span>Name:</span>
+    <div class="row">
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4">Name:</div>
+          <div class="col-md-8">{{ product.productName }}</div>
         </div>
-        <div>
-          <span>Code:</span>
+        <div class="row">
+          <div class="col-md-4">Code:</div>
+          <div class="col-md-8">
+            {{ product.productCode | lowercase | convertHyphenToSpaces: "-" }}
+          </div>
         </div>
-        <div>
-          <span>Description:</span>
+        <div class="row">
+          <div class="col-md-4">Description:</div>
+          <div class="col-md-8">{{ product.description }}</div>
         </div>
-        <div>
-          <span>Availability:</span>
+        <div class="row">
+          <div class="col-md-4">Availability:</div>
+          <div class="col-md-8">{{ product.releaseDate }}</div>
         </div>
-        <div>
-          <span>Price:</span>
+        <div class="row">
+          <div class="col-md-4">Price:</div>
+          <div class="col-md-8">
+            {{ product.price | currency: "USD":"symbol" }}
+          </div>
         </div>
-        <div>
-          <span>5 Star Rating:</span>
-        </div>
-      </div>
-      <div>
-        <div>
-          <span>{{ product.productName }}</span>
-        </div>
-        <div>
-          <span>{{ product.productCode }}</span>
-        </div>
-        <div>
-          <span>{{ product.description }}</span>
-        </div>
-        <div>
-          <span>{{ product.releaseDate }}</span>
-        </div>
-        <div>
-          <span>{{ product.price }}</span>
-        </div>
-        <div>
-          <span>{{ product.starRating }}</span>
+        <div class="row">
+          <div class="col-md-4">5 Star Rating:</div>
+          <div class="col-md-8">
+            <pm-star [rating]="product.starRating"> </pm-star>
+          </div>
         </div>
       </div>
-      <div class="image-container">
-        <img class="image-box" [src]="product.imageUrl" />
+
+      <div class="col-md-4">
+        <img
+          class="center-block img-responsive"
+          [style.width.px]="200"
+          [style.margin.px]="2"
+          [src]="product.imageUrl"
+          [title]="product.productName"
+        />
       </div>
     </div>
   </div>
+
   <div class="card-footer">
     <button
       class="btn btn-outline-secondary"

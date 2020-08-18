@@ -11,7 +11,7 @@ export class ProductListComponent implements OnInit {
   public imageMargin = 2;
   public imageWidth = 50;
   public showImage = false;
-  private _listFilter = 'cart';
+  private _listFilter = '';
   public products: IProduct[];
   public filteredProducts: IProduct[];
   private _errorMessage: string;
