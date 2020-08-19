@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../shared/models/customer';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'pm-customer-reactive-form',
@@ -11,14 +11,14 @@ export class CustomerReactiveFormComponent implements OnInit {
   customer = new Customer();
   customerForm: FormGroup;
 
-  constructor() {}
+  constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
-    this.customerForm = new FormGroup({
-      firstName: new FormControl(),
-      lastName: new FormControl(),
-      sendCatalog: new FormControl(true),
-      email: new FormControl(),
+    this.customerForm = this._formBuilder.group({
+      firstName: '',
+      lastName: { value: 'Verma', disabled: true },
+      email: '',
+      sendCatalog: true,
     });
   }
 
