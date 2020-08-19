@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from '../shared/models/customer';
-import { NgForm } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'pm-customer-reactive-form',
@@ -9,13 +9,36 @@ import { NgForm } from '@angular/forms';
 })
 export class CustomerReactiveFormComponent implements OnInit {
   customer = new Customer();
+  customerForm: FormGroup;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.customerForm = new FormGroup({
+      firstName: new FormControl(),
+      lastName: new FormControl(),
+      sendCatalog: new FormControl(true),
+      email: new FormControl(),
+    });
+  }
 
-  save(customerForm: NgForm): void {
-    console.log(customerForm.form);
-    console.log('Saved: ' + JSON.stringify(customerForm.value));
+  save(): void {
+    console.log(this.customerForm);
+    console.log('Saved: ' + JSON.stringify(this.customerForm.value));
+  }
+
+  addTestData(): void {
+    this.customerForm.setValue({
+      firstName: 'Prashant',
+      lastName: 'Verma',
+      sendCatalog: true,
+      email: 'prashant2381@gmail.com',
+    });
+  }
+
+  updateTestData(): void {
+    this.customerForm.patchValue({
+      sendCatalog: false,
+    });
   }
 }
