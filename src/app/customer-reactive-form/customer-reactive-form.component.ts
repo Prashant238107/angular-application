@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Customer } from './customer';
+import { Customer } from '../shared/models/customer';
 import { NgForm } from '@angular/forms';
 
 @Component({
-  selector: 'pm-customer',
-  templateUrl: './customer.component.html',
-  styleUrls: ['./customer.component.scss'],
+  selector: 'pm-customer-reactive-form',
+  templateUrl: './customer-reactive-form.component.html',
+  styleUrls: ['./customer-reactive-form.component.scss'],
 })
-export class CustomerComponent implements OnInit {
+export class CustomerReactiveFormComponent implements OnInit {
   customer = new Customer();
 
   constructor() {}
