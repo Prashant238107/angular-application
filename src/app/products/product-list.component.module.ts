@@ -1,3 +1,4 @@
+import { AddProductModule } from './../add-product/add-product.component.module';
 import { NgModule } from '@angular/core';
 import { ProductListComponent } from './product-list.component';
 import { ConvertHyphenToSpaces } from '../shared/pipes/convert-hyphen-to-space.pipe';

@@ -7,10 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CustomerReactiveFormModule } from './customer-reactive-form/customer-reactive-form.module';
+import { AddProductModule } from './add-product/add-product.component.module';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ProductData } from './shared/services/product-data';
 @NgModule({
   declarations: [AppComponent, WelcomeComponent],
   imports: [
     BrowserModule,
+    InMemoryWebApiModule.forRoot(ProductData),
+    AddProductModule,
     CustomerReactiveFormModule,
     CustomerTemplateFormModule,
     ProductModule,

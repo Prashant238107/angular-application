@@ -1,5 +1,5 @@
 export interface IProduct {
-  productId: number;
+  id: number;
   productName: string;
   productCode: string;
   releaseDate: string;
@@ -7,4 +7,5 @@ export interface IProduct {
   description: string;
   starRating: number;
   imageUrl: string;
+  tags?: string[];
 }
