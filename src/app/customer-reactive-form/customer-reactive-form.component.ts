@@ -6,6 +6,7 @@ import {
   Validators,
   AbstractControl,
   ValidatorFn,
+  FormArray,
 } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
 
@@ -46,6 +47,10 @@ export class CustomerReactiveFormComponent implements OnInit {
   customer = new Customer();
   customerForm: FormGroup;
 
+  public get addresses(): FormArray {
+    return <FormArray>this.customerForm.get('addresses');
+  }
+
   emailMessage: string;
   private validationMessage = {
     required: 'Please enter your email address.',
@@ -67,8 +72,9 @@ export class CustomerReactiveFormComponent implements OnInit {
       ),
       phone: '',
       notification: 'email',
-      sendCatalog: true,
       rating: [null, [ratingRange(1, 5)]],
+      sendCatalog: true,
+      addresses: this._formBuilder.array([this.buildAddress()]),
     });
 
     this.customerForm.get('notification').valueChanges.subscribe((value) => {
@@ -90,7 +96,6 @@ export class CustomerReactiveFormComponent implements OnInit {
     this.customerForm.setValue({
       firstName: 'Prashant',
       lastName: 'Verma',
-      sendCatalog: true,
       emailGroup: {
         email: 'prashant2381@gmail.com',
         confirmEmail: 'a@g.com',
@@ -98,6 +103,7 @@ export class CustomerReactiveFormComponent implements OnInit {
       phone: '+91-9897158251',
       notification: 'email',
       rating: 5,
+      sendCatalog: true,
     });
   }
 
@@ -125,5 +131,20 @@ export class CustomerReactiveFormComponent implements OnInit {
         .map((key) => this.validationMessage[key])
         .join('');
     }
+  }
+
+  buildAddress(): FormGroup {
+    return this._formBuilder.group({
+      addressType: 'home',
+      street1: '',
+      street2: '',
+      city: '',
+      state: '',
+      zip: '',
+    });
+  }
+
+  addAddress(): void {
+    this.addresses.push(this.buildAddress());
   }
 }
