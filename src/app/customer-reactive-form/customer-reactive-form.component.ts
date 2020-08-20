@@ -20,6 +20,22 @@ function ratingRange(min: number, max: number): ValidatorFn {
     return null;
   };
 }
+
+function emailMatcher(
+  control: AbstractControl
+): { [key: string]: boolean } | null {
+  const email = control.get('email');
+  const confirmEmail = control.get('confirmEmail');
+  if (
+    email.pristine ||
+    confirmEmail.pristine ||
+    email.value === confirmEmail.value
+  ) {
+    return null;
+  }
+  return { match: true };
+}
+
 @Component({
   selector: 'pm-customer-reactive-form',
   templateUrl: './customer-reactive-form.component.html',
@@ -35,7 +51,13 @@ export class CustomerReactiveFormComponent implements OnInit {
     this.customerForm = this._formBuilder.group({
       firstName: ['Prashant', [Validators.required, Validators.minLength(3)]],
       lastName: ['Verma', [Validators.required, Validators.maxLength(50)]],
-      email: ['', [Validators.required, Validators.email]],
+      emailGroup: this._formBuilder.group(
+        {
+          email: ['', [Validators.required, Validators.email]],
+          confirmEmail: ['', Validators.required],
+        },
+        { validator: emailMatcher }
+      ),
       phone: '',
       notification: 'email',
       sendCatalog: true,
