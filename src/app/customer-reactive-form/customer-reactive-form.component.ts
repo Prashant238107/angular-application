@@ -45,6 +45,12 @@ export class CustomerReactiveFormComponent implements OnInit {
   customer = new Customer();
   customerForm: FormGroup;
 
+  emailMessage: string;
+  private validationMessage = {
+    required: 'Please enter your email address.',
+    email: 'Please enter a valid email address.',
+  };
+
   constructor(private _formBuilder: FormBuilder) {}
 
   ngOnInit(): void {
@@ -66,6 +72,11 @@ export class CustomerReactiveFormComponent implements OnInit {
 
     this.customerForm.get('notification').valueChanges.subscribe((value) => {
       this.setNotification(value);
+    });
+
+    const emailControl = this.customerForm.get('emailGroup.email');
+    emailControl.valueChanges.subscribe((value) => {
+      this.setMessage(emailControl);
     });
   }
 
@@ -104,5 +115,14 @@ export class CustomerReactiveFormComponent implements OnInit {
     }
 
     phoneControl.updateValueAndValidity();
+  }
+
+  setMessage(control: AbstractControl): void {
+    this.emailMessage = '';
+    if ((control.touched || control.dirty) && control.errors) {
+      this.emailMessage = Object.keys(control.errors)
+        .map((key) => this.validationMessage[key])
+        .join('');
+    }
   }
 }
