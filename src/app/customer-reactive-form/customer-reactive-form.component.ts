@@ -75,7 +75,10 @@ export class CustomerReactiveFormComponent implements OnInit {
       firstName: 'Prashant',
       lastName: 'Verma',
       sendCatalog: true,
-      email: 'prashant2381@gmail.com',
+      emailGroup: {
+        email: 'prashant2381@gmail.com',
+        confirmEmail: 'a@g.com',
+      },
       phone: '+91-9897158251',
       notification: 'email',
       rating: 5,
