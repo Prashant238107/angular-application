@@ -7,6 +7,7 @@ import {
   AbstractControl,
   ValidatorFn,
 } from '@angular/forms';
+import { debounceTime } from 'rxjs/operators';
 
 function ratingRange(min: number, max: number): ValidatorFn {
   return (control: AbstractControl): { [key: string]: boolean } | null => {
@@ -75,7 +76,7 @@ export class CustomerReactiveFormComponent implements OnInit {
     });
 
     const emailControl = this.customerForm.get('emailGroup.email');
-    emailControl.valueChanges.subscribe((value) => {
+    emailControl.valueChanges.pipe(debounceTime(1000)).subscribe((value) => {
       this.setMessage(emailControl);
     });
   }
