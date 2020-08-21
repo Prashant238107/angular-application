@@ -74,9 +74,11 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const resolvedData: ProductResolved = this.route.snapshot.data['product'];
-    this.errorMessage = resolvedData.error;
-    this.displayProduct(resolvedData.product);
+    this.route.data.subscribe((data) => {
+      const resolvedData: ProductResolved = data['product'];
+      this.errorMessage = resolvedData.error;
+      this.displayProduct(resolvedData.product);
+    });
     this.productForm = this.fb.group({
       productName: [
         '',
