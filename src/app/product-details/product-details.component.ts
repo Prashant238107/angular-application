@@ -1,4 +1,4 @@
-import { IProduct } from './../shared/models/product';
+import { IProduct, ProductResolved } from './../shared/models/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../shared/services/product.service';
@@ -20,11 +20,14 @@ export class ProductDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const param = this.route.snapshot.paramMap.get('id');
+    const resolvedData: ProductResolved = this.route.snapshot.data['product'];
+    this.errorMessage = resolvedData.error;
+    this.onProductRetrieved(resolvedData.product);
+    /* const param = this.route.snapshot.paramMap.get('id');
     if (param) {
       const id = +param;
       this.getProduct(id);
-    }
+    } */
   }
 
   getProduct(id: number): void {
@@ -36,5 +39,15 @@ export class ProductDetailsComponent implements OnInit {
 
   onBack(): void {
     this.router.navigate(['/products']);
+  }
+
+  onProductRetrieved(product: IProduct): void {
+    this.product = product;
+
+    if (this.product) {
+      this.pageTitle = `Product Detail: ${this.product.productName}`;
+    } else {
+      this.pageTitle = 'No product found';
+    }
   }
 }

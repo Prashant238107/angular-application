@@ -54,7 +54,7 @@ export class ProductListComponent implements OnInit {
   }
 
   private _performFilter(filterBy: string) {
-    filterBy = filterBy.toLowerCase();
+    filterBy = filterBy ? filterBy.toLowerCase() : '';
     return this.products.filter(
       (product: IProduct) =>
         product.productName.toLowerCase().indexOf(filterBy) !== -1

@@ -1,3 +1,4 @@
+import { ProductResolver } from './../shared/resolvers/product-resolver.service';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ProductDetailsComponent } from './product-details.component';
@@ -11,6 +12,7 @@ import { SharedModule } from '../shared/shared.module';
         path: 'products/:id',
         component: ProductDetailsComponent,
         canActivate: [ProductDetailsGuard],
+        resolve: { product: ProductResolver },
       },
     ]),
     SharedModule,

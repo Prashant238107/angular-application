@@ -1,3 +1,4 @@
+import { ProductResolver } from './../shared/resolvers/product-resolver.service';
 import { AddProductGuard } from './add-product.component.guard';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from './../shared/shared.module';
@@ -13,6 +14,7 @@ import { AddProductComponent } from './add-product.component';
         path: 'products/:id/edit',
         component: AddProductComponent,
         canDeactivate: [AddProductGuard],
+        resolve: { product: ProductResolver },
       },
     ]),
   ],

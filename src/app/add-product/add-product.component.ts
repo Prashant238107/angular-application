@@ -21,7 +21,7 @@ import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { GenericValidator } from '../shared/validators/generic-validator';
 import { ProductService } from '../shared/services/product.service';
-import { IProduct } from '../shared/models/product';
+import { IProduct, ProductResolved } from '../shared/models/product';
 
 @Component({
   templateUrl: './add-product.component.html',
@@ -90,10 +90,13 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
     });
 
     // Read the product Id from the route parameter
-    this.sub = this.route.paramMap.subscribe((params) => {
+    /* this.sub = this.route.paramMap.subscribe((params) => {
       const id = +params.get('id');
       this.getProduct(id);
-    });
+    }); */
+    const resolvedData: ProductResolved = this.route.snapshot.data['product'];
+    this.errorMessage = resolvedData.error;
+    this.displayProduct(resolvedData.product);
   }
 
   ngOnDestroy(): void {
