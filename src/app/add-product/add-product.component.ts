@@ -74,6 +74,9 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const resolvedData: ProductResolved = this.route.snapshot.data['product'];
+    this.errorMessage = resolvedData.error;
+    this.displayProduct(resolvedData.product);
     this.productForm = this.fb.group({
       productName: [
         '',
@@ -94,9 +97,6 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
       const id = +params.get('id');
       this.getProduct(id);
     }); */
-    const resolvedData: ProductResolved = this.route.snapshot.data['product'];
-    this.errorMessage = resolvedData.error;
-    this.displayProduct(resolvedData.product);
   }
 
   ngOnDestroy(): void {
