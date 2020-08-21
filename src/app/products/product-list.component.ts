@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { IProduct } from './../shared/models/product';
 import { ProductService } from './../shared/services/product.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,16 +18,24 @@ export class ProductListComponent implements OnInit {
   private _errorMessage: string;
 
   ngOnInit(): void {
+    this._listFilter = this.activatedRoute.snapshot.queryParamMap.get(
+      'filterBy'
+    );
+    this.showImage =
+      this.activatedRoute.snapshot.queryParamMap.get('showImage') === 'true';
     this._productService.getProducts().subscribe({
       next: (products) => {
         this.products = products;
-        this.filteredProducts = this.products;
+        this.filteredProducts = this._performFilter(this.listFilter);
       },
       error: (err) => (this._errorMessage = err),
     });
   }
 
-  constructor(private _productService: ProductService) {}
+  constructor(
+    private _productService: ProductService,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   public get listFilter(): string {
     return this._listFilter;
