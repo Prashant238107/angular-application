@@ -142,7 +142,7 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   displayProduct(product: IProduct): void {
-    if (this.productForm) {
+    /* if (this.productForm) {
       this.productForm.reset();
     }
     this.product = product;
@@ -160,9 +160,11 @@ export class AddProductComponent implements OnInit, AfterViewInit, OnDestroy {
       starRating: this.product.starRating,
       description: this.product.description,
     });
-    this.productForm.setControl('tags', this.fb.array(this.product.tags || []));
+    this.productForm.setControl('tags', this.fb.array(this.product.tags || [])); */
   }
 
+  // To convey between child component and it's parent with multiple tabs the button handling has to be done
+  // in the parent
   deleteProduct(): void {
     if (this.product.id === 0) {
       // Don't delete, it was never saved.
